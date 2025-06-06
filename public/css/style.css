@@ -70,3 +70,100 @@ body {
 .btn-submit:hover {
     background-color: #357ab8;
 }
+
+.user-type {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.user-type:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+}
+
+/* Homepage Container */
+.homepage-container {
+    max-width: 900px;
+    margin: 60px auto 40px;
+    padding: 0 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.homepage-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #222;
+    margin-bottom: 0.25em;
+    letter-spacing: -0.03em;
+}
+
+.homepage-subtitle {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 3em;
+}
+
+/* Profiles Wrapper */
+.profiles-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+/* Profile Card */
+.profile-card {
+    background-color: #ffffff;
+    width: 260px;
+    padding: 2.5rem 1.5rem 2rem;
+    border-radius: 14px;
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon */
+.profile-icon {
+    font-size: 4rem;
+    color: #2563eb; /* nice blue */
+    margin-bottom: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+.profile-card:hover .profile-icon {
+    color: #1d4ed8;
+}
+
+/* Profile Title */
+.profile-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Profile Description */
+.profile-description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.4;
+    max-width: 220px;
+}
+
+/* Footer */
+.homepage-footer {
+    margin-top: 50px;
+    font-size: 0.85rem;
+    color: #999;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
