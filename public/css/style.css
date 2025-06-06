@@ -1,5 +1,3 @@
-/* public/css/style.css */
-
 body {
     background-color: #f4f4f4;
     font-family: Arial, sans-serif;
@@ -80,7 +78,6 @@ body {
     transform: translateY(-5px);
 }
 
-/* Homepage Container */
 .homepage-container {
     max-width: 900px;
     margin: 60px auto 40px;
@@ -103,7 +100,6 @@ body {
     margin-bottom: 3em;
 }
 
-/* Profiles Wrapper */
 .profiles-wrapper {
     display: flex;
     justify-content: center;
@@ -111,7 +107,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* Profile Card */
 .profile-card {
     background-color: #ffffff;
     width: 260px;
@@ -132,7 +127,6 @@ body {
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15);
 }
 
-/* Icon */
 .profile-icon {
     font-size: 4rem;
     color: #2563eb; /* nice blue */
@@ -144,14 +138,12 @@ body {
     color: #1d4ed8;
 }
 
-/* Profile Title */
 .profile-title {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-/* Profile Description */
 .profile-description {
     font-size: 0.95rem;
     color: #555;
@@ -159,7 +151,6 @@ body {
     max-width: 220px;
 }
 
-/* Footer */
 .homepage-footer {
     margin-top: 50px;
     font-size: 0.85rem;
