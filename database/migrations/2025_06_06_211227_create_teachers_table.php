@@ -9,8 +9,8 @@ return new class extends Migration {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('disciplina')->nullable();
-            $table->string('escola')->nullable();
+            $table->string('subject')->nullable();
+            $table->string('institution')->nullable();
             $table->timestamps();
         });
     }

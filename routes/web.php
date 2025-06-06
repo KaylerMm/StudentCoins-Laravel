@@ -20,5 +20,16 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showRese
 Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 // Registration
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register');
+
 Route::get('/register/student', [RegisterController::class, 'showStudentRegisterForm'])->name('register.student');
 Route::post('/register/student', [RegisterController::class, 'registerStudent'])->name('register.student.post');  
+
+Route::get('/register/teacher', [RegisterController::class, 'showTeacherForm'])->name('register.teacher.form');
+Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])->name('register.teacher');
+
+Route::get('/register/partner', [RegisterController::class, 'showPartnerForm'])->name('register.partner.form');
+Route::post('/register/partner', [RegisterController::class, 'registerPartner'])->name('register.partner');
+

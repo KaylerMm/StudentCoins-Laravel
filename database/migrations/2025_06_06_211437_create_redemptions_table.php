@@ -10,7 +10,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('reward_id')->constrained('rewards')->onDelete('cascade');
-            $table->enum('status', ['pendente', 'aprovado', 'recusado'])->default('pendente');
+            $table->enum('status', ['pending', 'approved', 'refused'])->default('pending');
             $table->timestamps();
         });
     }

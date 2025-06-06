@@ -9,8 +9,8 @@ return new class extends Migration {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('turma')->nullable();
-            $table->string('curso')->nullable();
+            $table->string('class')->nullable();
+            $table->string('course')->nullable();
             $table->timestamps();
         });
     }

@@ -9,7 +9,7 @@ return new class extends Migration {
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('empresa_nome');
+            $table->string('company_name');
             $table->string('cnpj')->unique();
             $table->timestamps();
         });

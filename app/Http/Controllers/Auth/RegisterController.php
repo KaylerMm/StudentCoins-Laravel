@@ -19,35 +19,93 @@ class RegisterController extends Controller
 
     public function registerStudent(Request $request)
     {
+        try {
+            $data = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users',
+                'password' => ['required', 'confirmed', Password::defaults()],
+                'class' => 'required|string|max:50',
+                'course' => 'required|string|max:100',
+            ]);
+    
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+    
+            Student::create([
+                'user_id' => $user->id,
+                'class' => $data['class'],
+                'course' => $data['course'],
+            ]);
+    
+            Wallet::create([
+                'user_id' => $user->id,
+                'balance' => 0,
+            ]);
+    
+            // Automatically log in the user after registration
+            auth()->login($user);
+            return redirect()->route('dashboard.student');
+        }
+        catch (\Exception $e) {
+            \Log::error('Registration error: ' . $e->getMessage(), $e->getTrace());
+            return redirect()->back()->withErrors(['error' => 'Registration failed. Please try again.']);
+        }
+    }
+
+    public function showTeacherForm()
+    {
+        return view('auth.register-teacher');
+    }
+
+    public function registerTeacher(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::defaults()],
-            'turma' => 'required|string|max:50',
-            'curso' => 'required|string|max:100',
+            'subject' => 'required|string|max:100',
         ]);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'student',
-        ]);
-
-        Student::create([
-            'user_id' => $user->id,
-            'turma' => $data['turma'],
-            'curso' => $data['curso'],
-        ]);
-
-        Wallet::create([
-            'user_id' => $user->id,
-            'balance' => 0,
+            'role' => 'teacher',
         ]);
 
         // Automatically log in the user after registration
         auth()->login($user);
 
-        return redirect()->route('dashboard.student');
+        return redirect()->route('dashboard.teacher');
+    }
+
+    public function showPartnerForm()
+    {
+        return view('auth.register-partner');
+    }
+
+    public function registerPartner(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => ['required', 'confirmed', Password::defaults()],
+            'company_name' => 'required|string|max:100',
+        ]);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'role' => 'partner',
+        ]);
+
+        // Automatically log in the user after registration
+        auth()->login($user);
+
+        return redirect()->route('dashboard.partner');
     }
 }

@@ -1,34 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<h2>Cadastro de Aluno</h2>
+<div class="form-container">
+    <h2 class="form-title">Cadastro de Aluno</h2>
 
-<form method="POST" action="{{ route('register.student') }}">
-    @csrf
+    <form method="POST" action="{{ route('register.student') }}" class="form">
+        @csrf
 
-    <label>Nome</label>
-    <input type="text" name="name" value="{{ old('name') }}" required>
-    @error('name') <div>{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" name="name" id="name" value="{{ old('name') }}" required />
+            @error('name')
+                <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <label>Email</label>
-    <input type="email" name="email" value="{{ old('email') }}" required>
-    @error('email') <div>{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" value="{{ old('email') }}" required />
+            @error('email')
+                <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <label>Senha</label>
-    <input type="password" name="password" required>
-    @error('password') <div>{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" name="password" id="password" required />
+            @error('password')
+                <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <label>Confirme a senha</label>
-    <input type="password" name="password_confirmation" required>
+        <div class="form-group">
+            <label for="password_confirmation">Confirme a senha</label>
+            <input type="password" name="password_confirmation" id="password_confirmation" required />
+        </div>
 
-    <label>Turma</label>
-    <input type="text" name="turma" value="{{ old('turma') }}" required>
-    @error('turma') <div>{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="class">Turma</label>
+            <input type="text" name="class" id="class" value="{{ old('class') }}" required />
+            @error('class')
+                <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <label>Curso</label>
-    <input type="text" name="curso" value="{{ old('curso') }}" required>
-    @error('curso') <div>{{ $message }}</div> @enderror
+        <div class="form-group">
+            <label for="course">Curso</label>
+            <input type="text" name="course" id="course" value="{{ old('course') }}" required />
+            @error('course')
+                <p class="error">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <button type="submit">Registrar</button>
-</form>
+        <button type="submit" class="btn-submit">
+            Registrar
+        </button>
+    </form>
+</div>
 @endsection
