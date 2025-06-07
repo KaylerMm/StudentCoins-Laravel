@@ -31,6 +31,12 @@
         </div>
 
         <div class="form-group">
+            <label for="class">Instituição</label>
+            <input type="text" name="institution" id="institution" value="{{ old('institution') }}" required />
+            @error('class') <p class="error">{{ $message }}</p> @enderror
+        </div>
+        
+        <div class="form-group">
             <label for="subject">Matéria</label>
             <input type="text" name="subject" id="subject" value="{{ old('subject') }}" required />
             @error('subject') <p class="error">{{ $message }}</p> @enderror

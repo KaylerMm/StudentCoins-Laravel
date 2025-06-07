@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -67,13 +68,19 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::defaults()],
             'subject' => 'required|string|max:100',
+            'institution' => 'required|string|max:100',
         ]);
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'teacher',
+        ]);
+
+        Teacher::create([
+            'user_id' => $user->id,
+            'subject' => $data['subject'],
+            'institution' => $data['institution'],
         ]);
 
         // Automatically log in the user after registration
