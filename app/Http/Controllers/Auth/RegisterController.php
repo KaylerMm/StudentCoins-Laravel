@@ -9,6 +9,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Partner;
 use App\Models\Wallet;
+use App\Enums\UserRoles;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -34,6 +35,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
+                'role' => UserRoles::STUDENT->value,
             ]);
     
             Student::create([
@@ -76,6 +78,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => UserRoles::TEACHER->value,
         ]);
 
         Teacher::create([
@@ -113,6 +116,7 @@ class RegisterController extends Controller
             'name' => $data['company_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => UserRoles::PARTNER->value,
         ]);
 
         Partner::create([
