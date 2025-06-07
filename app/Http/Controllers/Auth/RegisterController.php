@@ -84,6 +84,11 @@ class RegisterController extends Controller
             'institution' => $data['institution'],
         ]);
 
+        Wallet::create([
+            'user_id' => $user->id,
+            'balance' => 0,
+        ]);
+
         // Automatically log in the user after registration
         auth()->login($user);
 
@@ -114,6 +119,11 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'company_name' => $data['company_name'],
             'cnpj' => $data['cnpj'],
+        ]);
+
+        Wallet::create([
+            'user_id' => $user->id,
+            'balance' => 1000000,
         ]);
 
         // Automatically log in the user after registration
