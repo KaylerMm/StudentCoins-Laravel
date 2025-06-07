@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Partner;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -97,17 +98,22 @@ class RegisterController extends Controller
     public function registerPartner(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'company_name' => 'required|string|max:100',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::defaults()],
-            'company_name' => 'required|string|max:100',
+            'cnpj' => 'required|string|max:20',
         ]);
 
         $user = User::create([
-            'name' => $data['name'],
+            'name' => $data['company_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => 'partner',
+        ]);
+
+        Partner::create([
+            'user_id' => $user->id,
+            'company_name' => $data['company_name'],
+            'cnpj' => $data['cnpj'],
         ]);
 
         // Automatically log in the user after registration

@@ -14,9 +14,9 @@
         </div>
 
         <div class="form-group">
-            <label for="responsible">Responsável</label>
-            <input type="text" name="responsible" id="responsible" value="{{ old('responsible') }}" required />
-            @error('responsible') <p class="error">{{ $message }}</p> @enderror
+            <label for="cnpj">CNPJ</label>
+            <input type="text" name="cnpj" id="cnpj" value="{{ old('cnpj') }}" required />
+            @error('cnpj') <p class="error">{{ $message }}</p> @enderror
         </div>
 
         <div class="form-group">
