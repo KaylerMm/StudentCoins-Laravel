@@ -51,7 +51,7 @@ class RegisterController extends Controller
     
             // Automatically log in the user after registration
             auth()->login($user);
-            return redirect()->route('dashboard.student');
+            return redirect()->route('dashboard');
         }
         catch (\Exception $e) {
             \Log::error('Registration error: ' . $e->getMessage(), $e->getTrace());
@@ -95,7 +95,7 @@ class RegisterController extends Controller
         // Automatically log in the user after registration
         auth()->login($user);
 
-        return redirect()->route('dashboard.teacher');
+        return redirect()->route('dashboard');
     }
 
     public function showPartnerForm()
@@ -133,6 +133,6 @@ class RegisterController extends Controller
         // Automatically log in the user after registration
         auth()->login($user);
 
-        return redirect()->route('dashboard.partner');
+        return redirect()->route('dashboard');
     }
 }

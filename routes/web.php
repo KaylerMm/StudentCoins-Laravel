@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 // Homepage
 Route::get('/', function () {
@@ -38,3 +39,7 @@ Route::post('/register/teacher', [RegisterController::class, 'registerTeacher'])
 Route::get('/register/partner', [RegisterController::class, 'showPartnerForm'])->name('register.partner.form');
 Route::post('/register/partner', [RegisterController::class, 'registerPartner'])->name('register.partner');
 
+// Dashboard
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
