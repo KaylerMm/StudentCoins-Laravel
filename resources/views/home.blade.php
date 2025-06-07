@@ -23,6 +23,12 @@
                 <h3 class="profile-title">Empresa Parceira</h3>
                 <p class="profile-description">Cadastre sua empresa para parcerias e oportunidades.</p>
             </a>
+
+            <a href="{{ route('login') }}" class="profile-card login-card">
+                <i class="fa-solid fa-right-to-bracket profile-icon"></i>
+                <h3 class="profile-title">Já tenho uma conta!</h3>
+                <p class="profile-description">Clique aqui para entrar na plataforma.</p>
+            </a>
         </div>
     </main>
 
