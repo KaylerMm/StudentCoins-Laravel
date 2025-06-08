@@ -7,49 +7,57 @@
     <form method="POST" action="{{ route('register.student') }}" class="form">
         @csrf
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="name">Nome</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required />
-            @error('name')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <div class="input-icon-wrapper">
+                <i class="fas fa-user"></i>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" required />
+            </div>
+            @error('name') <p class="error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" required />
-            @error('email')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <div class="input-icon-wrapper">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" id="email" value="{{ old('email') }}" required />
+            </div>
+            @error('email') <p class="error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="password">Senha</label>
-            <input type="password" name="password" id="password" required />
-            @error('password')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <div class="input-icon-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" id="password" required />
+            </div>
+            @error('password') <p class="error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="password_confirmation">Confirme a senha</label>
-            <input type="password" name="password_confirmation" id="password_confirmation" required />
+            <div class="input-icon-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password_confirmation" id="password_confirmation" required />
+            </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="class">Turma</label>
-            <input type="text" name="class" id="class" value="{{ old('class') }}" required />
-            @error('class')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <div class="input-icon-wrapper">
+                <i class="fas fa-users"></i>
+                <input type="text" name="class" id="class" value="{{ old('class') }}" required />
+            </div>
+            @error('class') <p class="error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="form-group">
+        <div class="form-group with-icon">
             <label for="course">Curso</label>
-            <input type="text" name="course" id="course" value="{{ old('course') }}" required />
-            @error('course')
-                <p class="error">{{ $message }}</p>
-            @enderror
+            <div class="input-icon-wrapper">
+                <i class="fas fa-graduation-cap"></i>
+                <input type="text" name="course" id="course" value="{{ old('course') }}" required />
+            </div>
+            @error('course') <p class="error">{{ $message }}</p> @enderror
         </div>
 
         <button type="submit" class="btn-submit">

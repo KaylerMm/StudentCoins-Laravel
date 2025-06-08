@@ -1,36 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="form-container">
-  <div class="form-card">
-    <h1 class="form-title">Entrar</h1>
+<div class="modern-login-container">
+  <div class="login-card">
+    <h1 class="login-title">
+      <i class="fas fa-sign-in-alt"></i> Entrar
+    </h1>
 
     <form method="POST" action="{{ route('login') }}" novalidate>
       @csrf
 
-      <div class="form-group">
-        <label for="email">Email</label>
+      <div class="form-group with-icon">
+        <i class="fas fa-envelope"></i>
         <input
           id="email"
           name="email"
           type="email"
-          autocomplete="email"
-          required
-          autofocus
+          placeholder="Email"
           value="{{ old('email') }}"
+          required
         />
         @error('email')
           <p class="error-message">{{ $message }}</p>
         @enderror
       </div>
 
-      <div class="form-group">
-        <label for="password">Senha</label>
+      <div class="form-group with-icon">
+        <i class="fas fa-lock"></i>
         <input
           id="password"
           name="password"
           type="password"
-          autocomplete="current-password"
+          placeholder="Senha"
           required
         />
         @error('password')
@@ -38,19 +39,15 @@
         @enderror
       </div>
 
-      <div class="form-group">
-        <label for="submit">
+      <div class="form-options">
+        <label>
           <input type="checkbox" name="remember" />
           Lembrar-me
         </label>
         <a href="{{ route('password.request') }}">Esqueceu a senha?</a>
       </div>
 
-      <br>
-      
-      <div class="form-group">
-        <button type="submit" class="btn-submit">Entrar</button>
-      </div>
+      <button type="submit" class="btn-modern-submit">Entrar</button>
     </form>
   </div>
 </div>
