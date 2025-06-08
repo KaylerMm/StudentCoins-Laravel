@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CoinTransferController;
 
 // Homepage
 Route::get('/', function () {
@@ -42,4 +43,10 @@ Route::post('/register/partner', [RegisterController::class, 'registerPartner'])
 // Dashboard
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+// Coin Transfer
+Route::middleware(['auth'])->group(function () {
+    Route::get('/coins/transfer', [CoinTransferController::class, 'create'])->name('coins.transfer.create');
+    Route::post('/coins/transfer', [CoinTransferController::class, 'store'])->name('coins.transfer.store');
 });
