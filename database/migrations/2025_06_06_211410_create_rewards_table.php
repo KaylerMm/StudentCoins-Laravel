@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->unsignedInteger('cost'); // em moedas
             $table->unsignedInteger('stock')->default(0);
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

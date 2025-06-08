@@ -16,7 +16,7 @@
         </div>
 
         <div class="dashboard-actions">
-            <a href="#" class="btn-submit">Ver Recompensas</a>
+            <a href="{{ route(name: 'rewards') }}" class="btn-submit">Resgatar Uma Vantagem</a>
         </div>
     </div>
 

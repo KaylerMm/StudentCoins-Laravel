@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CoinTransferController;
+use App\Http\Controllers\RewardController;
 
 // Homepage
 Route::get('/', function () {
@@ -49,4 +50,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/coins/transfer', [CoinTransferController::class, 'create'])->name('coins.transfer.create');
     Route::post('/coins/transfer', [CoinTransferController::class, 'store'])->name('coins.transfer.store');
+});
+
+// Rewards
+Route::middleware(['auth'])->group(function () {
+    Route::get('/rewards/create', [RewardController::class, 'create'])->name('rewards.create');
+    Route::post('/rewards/create', [RewardController::class, 'store'])->name('rewards.store');
+    Route::get('/rewards', [RewardController::class, 'index'])->name('rewards');
 });

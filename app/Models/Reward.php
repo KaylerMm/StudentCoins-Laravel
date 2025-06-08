@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Reward extends Model
 {
-    protected $fillable = ['partner_id', 'name', 'description', 'cost', 'stock'];
+    protected $fillable = ['partner_id', 'name', 'description', 'cost', 'stock', 'image_path'];
 
     public function partner(): BelongsTo {
         return $this->belongsTo(User::class, 'partner_id');

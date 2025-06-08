@@ -17,7 +17,7 @@
 
         <div class="dashboard-actions">
             <a href="coins/transfer" class="btn-submit">Fazer Nova Transferência</a>
-            <a href="#" class="btn-submit">Ver Vantagens</a>
+            <a href="{{ route(name: 'rewards.create') }}" class="btn-submit">Criar Vantagem</a>
         </div>
     </div>
 
