@@ -6,6 +6,7 @@ use App\Enums\UserRoles;
 use App\Models\Partner;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\Wallet;
 use Illuminate\Support\Facades\DB;
 
 class CoinTransferService
@@ -26,8 +27,9 @@ class CoinTransferService
             throw new \InvalidArgumentException('Usuário remetente ou destinatário não encontrado.');
         }
 
-        $this->checkSenderBalance($sender, $amount);
-        $this->makeTransfer($sender, $receiver, $amount);
+        [$senderWallet, $receiverWallet] = $this->getTransactionWallets($sender, $receiver);
+        $this->checkSenderBalance($senderWallet, $amount);
+        $this->makeTransaction($senderWallet, $receiverWallet, $amount);
         return true;
     }
 
@@ -62,21 +64,26 @@ class CoinTransferService
         }
     }
 
-    protected function checkSenderBalance($sender, float $amount): void
+    protected function checkSenderBalance(Wallet $senderWallet, float $amount): void
     {
-        if ($sender->user->wallet->balance < $amount) {
+        if ($senderWallet->balance < $amount) {
             throw new \InvalidArgumentException('Saldo insuficiente para a transferência.');
         }
     }
 
-    protected function makeTransfer($sender, $receiver, float $amount): void
+    protected function makeTransaction($senderWallet, $receiverWallet, float $amount): void
     {
-        DB::transaction(function () use ($sender, $receiver, $amount) {
-            $senderUser = $sender->user;
-            $receiverUser = $receiver->user;
+        DB::transaction(function () use ($senderWallet, $receiverWallet, $amount) {
+            $senderWallet->balance -= $amount;
+            $receiverWallet->balance += $amount;
 
-            $senderUser->adjustWalletBalance(-$amount);
-            $receiverUser->adjustWalletBalance($amount);
+            $senderWallet->save();
+            $receiverWallet->save();
         });
+    }
+
+    protected function getTransactionWallets($sender, $receiver): array
+    {
+        return [$sender->user->wallet, $receiver->user->wallet];
     }
 }
