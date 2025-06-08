@@ -6,7 +6,9 @@ use App\Enums\UserRoles;
 use App\Models\Partner;
 use App\Models\Teacher;
 use App\Models\Student;
+use App\Models\Transaction;
 use App\Models\Wallet;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class CoinTransferService
@@ -79,6 +81,15 @@ class CoinTransferService
 
             $senderWallet->save();
             $receiverWallet->save();
+
+            //@todo: Implement DateTime for transaction
+            Transaction::create([
+                'from_user_id' => $senderWallet->user_id,
+                'to_user_id' => $receiverWallet->user_id,
+                'amount' => $amount,
+                'type' => 'transfer',
+                'description' => "Transferência de {$amount} moedas de {$senderWallet->user->name} para {$receiverWallet->user->name} em ", Carbon::now()->toDateTimeString()
+            ]);
         });
     }
 
