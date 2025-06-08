@@ -24,6 +24,7 @@ class CoinTransferController extends Controller
     {
         $user = Auth::user();
         $userType = $this->getUserType($user);
+        $wallet = $user->wallet ?? null;
 
         if ($userType === UserRoles::PARTNER) {
             $recipients = Teacher::with('user')->get();
@@ -35,7 +36,7 @@ class CoinTransferController extends Controller
             abort(403, 'Acesso negado.');
         }
 
-        return view('coins.transfer', compact('recipients', 'userType'));
+        return view('coins.transfer', compact('recipients', 'userType', 'wallet'));
     }
 
     public function store(Request $request)
