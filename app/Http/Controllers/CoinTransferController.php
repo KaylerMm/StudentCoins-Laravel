@@ -26,10 +26,10 @@ class CoinTransferController extends Controller
         $userType = $this->getUserType($user);
 
         if ($userType === UserRoles::PARTNER) {
-            $recipients = Teacher::all();
+            $recipients = Teacher::with('user')->get();
         }
         else if ($userType === UserRoles::TEACHER) {
-            $recipients = Student::all();
+            $recipients = Student::with('user')->get();
         }
         else {
             abort(403, 'Acesso negado.');

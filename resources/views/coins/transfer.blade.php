@@ -31,7 +31,7 @@
                 <option value="">-- Selecione --</option>
                 @foreach($recipients as $recipient)
                     <option value="{{ $recipient->id }}" {{ old('recipient_id') == $recipient->id ? 'selected' : '' }}>
-                        {{ $recipient->name }}
+                        {{ ($recipient->user->name ?? 'Sem nome' ) . ' - ' . ($recipient->user->email ?? ' Sem email ') }}
                     </option>
                 @endforeach
             </select>
