@@ -42,6 +42,7 @@ class CoinTransferController extends Controller
     {
         $user = Auth::user();
         $userType = $this->getUserType($user);
+        $user = $this->getUserByTypeAndId($userType, $user->id);
 
         $request->validate([
             'recipient_id' => 'required|integer',
@@ -87,5 +88,19 @@ class CoinTransferController extends Controller
         }
 
         return null;
+    }
+
+    protected function getUserByTypeAndId(UserRoles $type, int $id)
+    {
+        switch ($type) {
+            case UserRoles::PARTNER:
+                return Partner::with('user')->where('user_id', '=', $id)->first();
+            case UserRoles::TEACHER:
+                return Teacher::with('user')->where('user_id', '=', $id)->first();
+            case UserRoles::STUDENT:
+                return Student::with('user')->where('user_id', '=', $id)->first();
+            default:
+                return null;
+        }
     }
 }

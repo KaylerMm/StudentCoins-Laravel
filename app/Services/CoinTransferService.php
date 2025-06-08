@@ -6,6 +6,7 @@ use App\Enums\UserRoles;
 use App\Models\Partner;
 use App\Models\Teacher;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 
 class CoinTransferService
 {
@@ -26,6 +27,7 @@ class CoinTransferService
         }
 
         $this->checkSenderBalance($sender, $amount);
+        $this->makeTransfer($sender, $receiver, $amount);
         return true;
     }
 
@@ -50,35 +52,31 @@ class CoinTransferService
     {
         switch ($type) {
             case UserRoles::PARTNER:
-                return Partner::where('user_id', '=', $id)->first();
+                return Partner::with('user')->where('id', '=', $id)->first();
             case UserRoles::TEACHER:
-                return Teacher::where('user_id', '=', $id)->first();
+                return Teacher::with('user')->where('id', '=', $id)->first();
             case UserRoles::STUDENT:
-                return Student::where('user_id', '=', $id)->first();
+                return Student::with('user')->where('id', '=', $id)->first();
             default:
                 return null;
         }
     }
 
-    //@todo Implement to use user Wallet
     protected function checkSenderBalance($sender, float $amount): void
     {
-        if ($sender->coins < $amount) {
+        if ($sender->user->wallet->balance < $amount) {
             throw new \InvalidArgumentException('Saldo insuficiente para a transferência.');
         }
     }
 
     protected function makeTransfer($sender, $receiver, float $amount): void
     {
-        try{
-            $sender->coins -= $amount;
-            $receiver->coins += $amount;
-    
-            $sender->save();
-            $receiver->save();
-        }
-        catch (\Exception $e) {
-            throw new \RuntimeException('Erro ao processar a transferência: ' . $e->getMessage(), $e->getCode(), $e);
-        }
+        DB::transaction(function () use ($sender, $receiver, $amount) {
+            $senderUser = $sender->user;
+            $receiverUser = $receiver->user;
+
+            $senderUser->adjustWalletBalance(-$amount);
+            $receiverUser->adjustWalletBalance($amount);
+        });
     }
 }

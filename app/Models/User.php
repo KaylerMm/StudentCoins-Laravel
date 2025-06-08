@@ -45,4 +45,10 @@ class User extends Authenticatable
     public function redemptions(): HasMany {
         return $this->hasMany(Redemption::class, 'student_id');
     }
+
+    public function adjustWalletBalance(float $amount): void
+    {
+        $this->wallet->balance += $amount;
+        $this->wallet->save();
+    }
 }
