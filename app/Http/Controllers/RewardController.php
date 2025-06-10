@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Reward;
+use App\Models\Transaction;
 use App\Enums\UserRoles;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,5 +65,49 @@ class RewardController extends Controller
         Reward::create($data);
 
         return redirect()->route('rewards')->with('success', 'Vantagem criada com sucesso!');
+    }
+
+    public function redeem(Request $request, Reward $reward)
+    {
+        try{
+            $user = Auth::user();
+    
+            if ($user->wallet->balance < $reward->cost) {
+                return redirect()->back()->with('error', 'Você não tem moedas suficientes para resgatar esta vantagem.');
+            }
+            
+            if ($reward->stock <= 0) {
+                return redirect()->back()->with('error', 'Esta vantagem está esgotada.');
+            }
+            
+            DB::transaction(function () use ($user, $reward) {
+                // Deduct coins from user
+                $user->wallet->balance -= $reward->cost;
+                $user->wallet->save();
+                
+                // Update reward stock
+                $reward->stock -= 1;
+                $reward->save();
+                
+                // Create transaction record
+                Transaction::create([
+                    'from_user_id' => $user->id,
+                    'to_user_id' => $reward->partner_id,
+                    'amount' => $reward->cost,
+                    'type' => 'reward',
+                    'description' => "Resgatou a vantagem: {$reward->name}",
+                ]);
+            });
+            
+            return redirect()->route('rewards')->with('success', 'Vantagem resgatada com sucesso!');
+        }
+        catch (\Exception $e) {
+            \Log::error('Error redeeming reward: ' . $e->getMessage(), [
+                'user_id' => $user->id,
+                'reward_id' => $reward->id,
+                $e->getTrace()
+            ]);
+            return redirect()->route('rewards')->with('error', 'Erro ao resgatar a vantagem. Por favor, tente novamente.');
+        }
     }
 }

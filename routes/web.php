@@ -54,7 +54,9 @@ Route::middleware(['auth'])->group(function () {
 
 // Rewards
 Route::middleware(['auth'])->group(function () {
+    Route::get('/rewards', [RewardController::class, 'index'])->name('rewards');
     Route::get('/rewards/create', [RewardController::class, 'create'])->name('rewards.create');
     Route::post('/rewards/create', [RewardController::class, 'store'])->name('rewards.store');
-    Route::get('/rewards', [RewardController::class, 'index'])->name('rewards');
+    Route::post('/rewards/{reward}/redeem', [RewardController::class, 'redeem'])->name('rewards.redeem');
 });
+

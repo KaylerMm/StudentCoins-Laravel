@@ -65,7 +65,7 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn-submit">Transferir</button>
+        <button type="submit" class="btn-submit" id="btn-transfer">Transferir</button>
     </form>
 </div>
 @endsection

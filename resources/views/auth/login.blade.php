@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="modern-login-container">
-  <div class="login-card">
+<div class="form-container">
+  <div class="login-panel">
     <h1 class="login-title">
       <i class="fas fa-sign-in-alt"></i> Entrar
     </h1>
@@ -47,7 +47,7 @@
         <a href="{{ route('password.request') }}">Esqueceu a senha?</a>
       </div>
 
-      <button type="submit" class="btn-modern-submit">Entrar</button>
+      <button type="submit" class="btn-submit">Entrar</button>
     </form>
   </div>
 </div>
