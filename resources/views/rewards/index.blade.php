@@ -38,7 +38,7 @@ use App\Enums\UserRoles;
             <option value="desc" {{ request('sort') === 'desc' ? 'selected' : '' }}>Custo: Maior → Menor</option>
         </select>
 
-        <button type="submit" class="rewards-button">Filtrar</button>
+        <button type="submit" class="btn-submit">Filtrar</button>
     </form>
 
     <div class="rewards-grid">
