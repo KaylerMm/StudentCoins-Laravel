@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="modern-login-container">
+<div class="form-container">
     <h2 class="form-title">Cadastro de Empresa Parceira</h2>
 
     <form method="POST" action="{{ route('register.partner') }}" class="form">
