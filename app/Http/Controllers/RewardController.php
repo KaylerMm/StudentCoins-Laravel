@@ -110,4 +110,9 @@ class RewardController extends Controller
             return redirect()->route('rewards')->with('error', 'Erro ao resgatar a vantagem. Por favor, tente novamente.');
         }
     }
+
+    public function show(Reward $reward)
+    {
+        return view('rewards.show', compact('reward'));
+    }
 }

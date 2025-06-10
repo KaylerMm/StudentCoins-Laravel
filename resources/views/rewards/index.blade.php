@@ -43,7 +43,7 @@ use App\Enums\UserRoles;
 
     <div class="rewards-grid">
         @forelse($rewards as $reward)
-            <div class="reward-card">
+            <div class="reward-card" onclick="window.location='{{ route('rewards.show', $reward) }}'">
                 @if($reward->image_path)
                     <img src="{{ asset('storage/' . $reward->image_path) }}" alt="{{ $reward->name }}" class="reward-image">
                 @endif

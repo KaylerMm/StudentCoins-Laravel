@@ -606,6 +606,11 @@ input[type="file"] {
   text-align: center;
 }
 
+.reward-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
 .reward-image {
   width: 100%;
   height: 180px;
@@ -641,6 +646,103 @@ input[type="file"] {
   font-size: 1.2rem;
   color: #777;
   grid-column: 1 / -1;
+}
+.reward-detail-container {
+    max-width: 720px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+.reward-detail-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    text-align: center;
+    color: #34495e;
+}
+
+.alert {
+    padding: 1rem 1.2rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.reward-detail-card {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 1.8rem 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.reward-detail-image {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.reward-detail-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.4rem;
+    line-height: 1.5;
+}
+
+.reward-detail-cost,
+.reward-detail-stock {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #34495e;
+    margin-bottom: 0.8rem;
+}
+
+.reward-detail-redeem-form {
+    margin-top: 1.8rem;
+    width: 100%;
+    max-width: 280px;
+}
+
+.btn-redeem {
+    width: 100%;
+    background-color: #27ae60;
+    padding: 0.7rem 0;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-redeem:hover {
+    background-color: #1e874b;
 }
 
 .btn-submit {
