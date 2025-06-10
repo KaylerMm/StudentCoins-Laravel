@@ -304,6 +304,7 @@ body {
 .btn-submit:hover {
   background: #005a9e;
   transform: translateY(-2px);
+  cursor: pointer;
 }
 
 /* Histórico de transações */
@@ -350,6 +351,7 @@ body {
 
 .transactions-table tr:hover {
   background-color: #e6f1fb;
+  cursor: pointer;
 }
 
 /* Mensagem de nenhuma transação */
